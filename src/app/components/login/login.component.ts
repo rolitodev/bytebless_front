@@ -1,43 +1,49 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NbLayoutModule, NbThemeService, NbToggleModule } from '@nebular/theme';
+import { SharedModule } from '../shared/modules/shared.module';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToggleThemeComponent } from "../shared/toggle-theme/toggle-theme.component";
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
-  selector: 'app-login',
-  standalone: true,
-  imports: [CommonModule, NbLayoutModule, NbToggleModule],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+    selector: 'app-login',
+    standalone: true,
+    templateUrl: './login.component.html',
+    styleUrl: './login.component.scss',
+    imports: [CommonModule, SharedModule, ToggleThemeComponent]
 })
 
 export class LoginComponent {
 
-  public themeService = inject(NbThemeService);
+  public _form = inject(FormBuilder);
+  public _theme = inject(ThemeService);
 
-  public browserTheme: boolean = window.matchMedia('(prefers-color-scheme: dark)').matches ? true : false;
-  public userTheme: boolean = Boolean(localStorage.getItem('theme'));
+  public isLoading: boolean = false;
+  public showPassword: boolean = false;
 
-  ngOnInit(): void {
-    if (this.browserTheme != Boolean(localStorage.getItem('theme'))) {
-      alert('Actualmente tienes configurado el modo oscuro en tu navegador, ¿aquí también lo quieres cambiar?');
-      return;
-    }
-    const validateStorageTheme = localStorage.getItem('theme') ? true : false;
-    if (!validateStorageTheme) {
-      localStorage.setItem('theme', 'default');
-    }
-    this.changeTheme();
+  public loginForm: FormGroup;
+
+  constructor() {
+    this.loginForm = this._form.group({
+      email: [null, [Validators.required, Validators.minLength(1), Validators.email]],
+      password: [null, [Validators.required, Validators.minLength(6)]],
+    });
   }
 
   clickChangeTheme(): void {
-    this.userTheme = !this.userTheme;
-    this.changeTheme();
+    this._theme.changeTheme();
   }
 
-  changeTheme(): void {
-    const browserTheme = this.userTheme ? 'dark' : 'default';
-    localStorage.setItem('theme', browserTheme);
-    this.themeService.changeTheme(browserTheme);
+  getInputType() {
+    if (this.showPassword) {
+      return 'text';
+    }
+    return 'password';
+  }
+
+  toggleShowPassword() {
+    this.showPassword = !this.showPassword;
+    return;
   }
 
 

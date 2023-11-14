@@ -1,4 +1,30 @@
-@forward '@nebular/theme/styles/theming';
-@use '@nebular/theme/styles/theming' as *;
-@use '@nebular/theme/styles/themes/default';
-@use '@nebular/theme/styles/themes/dark';
+@import '@nebular/theme/styles/theming';
+@import '@nebular/theme/styles/themes/default';
+@import '@nebular/theme/styles/themes/dark';
+
+$nb-themes: nb-register-theme((
+  color-primary-100: #ebe5ff,
+  color-primary-200: #d9ceff,
+  color-primary-300: #bea6ff,
+  color-primary-400: #9f75ff,
+  color-primary-500: #843dff,
+  color-primary-600: #7916ff,
+  color-primary-700: #6b04fd,
+  color-primary-800: #5a03d5,
+  color-primary-900: #4b05ad,
+  color-primary-default: #5a03d5,
+), default, default);
+
+
+$nb-themes: nb-register-theme((
+  color-primary-100: #ebe5ff,
+  color-primary-200: #d9ceff,
+  color-primary-300: #bea6ff,
+  color-primary-400: #9f75ff,
+  color-primary-500: #843dff,
+  color-primary-600: #7916ff,
+  color-primary-700: #6b04fd,
+  color-primary-800: #5a03d5,
+  color-primary-900: #4b05ad,
+  color-primary-default: #5a03d5,
+), dark, dark);
