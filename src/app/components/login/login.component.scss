@@ -1,4 +1,4 @@
-.container-login {
+.container-grl {
     display: flex;
     height: 100%;
 
@@ -103,33 +103,22 @@
     margin-left: 2.25em;
 }
 
-// @media only screen and (max-width: 912px) {
-//     .container-login {
-//         display: block;
+@media only screen and (max-width: 912px) {
+    .container-grl {
+        display: block;
 
-//         .left,
-//         .right {
-//             width: 100%;
-//         }
+        .left,
+        .right {
+            width: 100%;
+        }
 
-//         .left {
-//             height: 50%;
-
-//             .map {
-//                 width: 100%;
-//             }
-//         }
-//     }
-// }
-
-// @media only screen and (max-width: 490px) {
-//     .container-login {
-//         .left {
-//             padding: 20px;
-
-//             .content-travelers {
-//                 justify-content: center;
-//             }
-//         }
-//     }
-// }
+        .left {
+            display: none;
+        }
+        .right {
+            .content {
+                padding: 0px;
+            }
+        }
+    }
+}

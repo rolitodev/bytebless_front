@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SharedModule } from '../shared/modules/shared.module';
 import { ToggleThemeComponent } from "../shared/toggle-theme/toggle-theme.component";
 @Component({
@@ -18,8 +18,6 @@ export class RegisterComponent {
   public registerForm: FormGroup;
 
   public isLoading: boolean = false;
-
-  public strengthLabels = ['Inútil', 'Débil', 'Normal', 'Fuerte', 'Segura'];
 
   constructor() {
     this.registerForm = this._form.group({
